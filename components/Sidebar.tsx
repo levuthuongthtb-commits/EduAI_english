@@ -15,13 +15,16 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, setView, userRole, onLog
     { id: View.CREATE_TEST, label: 'Soạn đề AI', icon: '📝', role: UserRole.TEACHER },
     { id: View.STUDENT_PORTAL, label: 'Cổng học sinh', icon: '🎓', role: UserRole.STUDENT },
     { id: View.ANALYTICS, label: 'Thống kê & Phân tích', icon: '📊', role: UserRole.TEACHER },
+    { id: View.SETTINGS, label: 'Cài đặt hệ thống', icon: '⚙️', role: UserRole.TEACHER },
   ];
 
   // Lọc menu dựa trên vai trò
   const menuItems = allMenuItems.filter(item => {
-    if (userRole === UserRole.TEACHER) return true; // GV thấy tất cả (để có thể test cổng HS)
-    return item.role === UserRole.STUDENT; // HS chỉ thấy cổng HS
+    if (userRole === UserRole.TEACHER) return true;
+    return item.role === UserRole.STUDENT;
   });
+
+  const teacherName = localStorage.getItem('teacher_name') || 'Thầy Giáo';
 
   return (
     <div className="w-64 bg-white border-r border-slate-200 flex flex-col h-full hidden md:flex shadow-sm">
@@ -56,7 +59,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, setView, userRole, onLog
           </div>
           <div className="overflow-hidden">
             <p className="text-xs font-bold text-slate-900 truncate">
-              {userRole === UserRole.TEACHER ? 'Thầy Giáo' : 'Học Sinh'}
+              {userRole === UserRole.TEACHER ? teacherName : 'Học Sinh'}
             </p>
             <p className="text-[10px] text-slate-400 truncate uppercase font-semibold">
               {userRole === UserRole.TEACHER ? 'Quản trị viên' : 'Thành viên'}

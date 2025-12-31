@@ -7,6 +7,7 @@ import TestGenerator from './components/TestGenerator';
 import StudentPortal from './components/StudentPortal';
 import AnalyticsDashboard from './components/AnalyticsDashboard';
 import RoleSelector from './components/RoleSelector';
+import SettingsView from './components/SettingsView';
 
 const App: React.FC = () => {
   const [userRole, setUserRole] = useState<UserRole>(UserRole.NONE);
@@ -41,7 +42,6 @@ const App: React.FC = () => {
 
   const handleStudentSubmit = (result: StudentResult) => {
     setResults(prev => [...prev, result]);
-    // Stay in student portal for result view
   };
 
   const handleLogout = () => {
@@ -77,6 +77,9 @@ const App: React.FC = () => {
               )}
               {currentView === View.ANALYTICS && (
                 <AnalyticsDashboard results={results} test={activeTest} />
+              )}
+              {currentView === View.SETTINGS && (
+                <SettingsView />
               )}
             </>
           )}

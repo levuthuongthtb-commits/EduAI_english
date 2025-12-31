@@ -11,9 +11,6 @@ const RoleSelector: React.FC<RoleSelectorProps> = ({ onSelect }) => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  // Bạn có thể đổi mật khẩu tại đây
-  const TEACHER_PASSWORD = 'gv2024';
-
   const handleTeacherClick = () => {
     setShowPasswordInput(true);
     setError('');
@@ -21,6 +18,9 @@ const RoleSelector: React.FC<RoleSelectorProps> = ({ onSelect }) => {
 
   const handleVerifyPassword = (e: React.FormEvent) => {
     e.preventDefault();
+    // Lấy mật khẩu từ localStorage, nếu chưa có thì dùng mặc định 'gv2024'
+    const TEACHER_PASSWORD = localStorage.getItem('teacher_password') || 'gv2024';
+    
     if (password === TEACHER_PASSWORD) {
       onSelect(UserRole.TEACHER);
     } else {
